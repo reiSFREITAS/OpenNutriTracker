@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:opennutritracker/core/utils/calc/unit_calc.dart';
 import 'package:opennutritracker/generated/l10n.dart';
+import 'package:opennutritracker/core/utils/validator/input_validator.dart';
 
 class OnboardingSecondPageBody extends StatefulWidget {
   final Function(bool active, double? selectedHeight, double? selectedWeight,
@@ -193,21 +193,19 @@ class _OnboardingSecondPageBodyState extends State<OnboardingSecondPageBody> {
     final isHeightValid = _heightFormKey.currentState?.validate() ?? false;
     final isWeightValid = _weightFormKey.currentState?.validate() ?? false;
 
-    if (isHeightValid && isWeightValid) {
-      if (_parsedHeight != null && _parsedWeight != null) {
-        final heightCm = _isImperialSelected
-            ? UnitCalc.feetToCm(_parsedHeight!)
-            : _parsedHeight!;
-        final weightKg = _isImperialSelected
-            ? UnitCalc.lbsToKg(_parsedWeight!)
-            : _parsedWeight!;
+    final result = OnboardingInputValidator.checkCorrectInput(
+      parsedHeight: _parsedHeight,
+      parsedWeight: _parsedWeight,
+      isHeightValid: isHeightValid,
+      isWeightValid: isWeightValid,
+      isImperial: _isImperialSelected,
+    );
 
-        widget.setButtonContent(true, heightCm, weightKg, _isImperialSelected);
-      } else {
-        widget.setButtonContent(false, null, null, _isImperialSelected);
-      }
-    } else {
-      widget.setButtonContent(false, null, null, _isImperialSelected);
-    }
+    widget.setButtonContent(
+      result.valid,
+      result.heightCm,
+      result.weightKg,
+      _isImperialSelected,
+    );
   }
 }
