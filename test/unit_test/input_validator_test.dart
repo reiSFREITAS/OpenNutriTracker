@@ -2,11 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:opennutritracker/core/utils/validator/input_validator.dart';
 
 void main() {
-  group('OnboardingInputValidator - MC/DC Tests', () {
-    const isImperial = false; // Pode ser true, tanto faz para lógica de fluxo
+  group('OnboardingInputValidator - MC/DC test', () {
+    const isImperial = false; 
 
-    // CT1: Todas entradas válidas
-    test('CT1 - Todas entradas válidas', () {
+    test('CT1 - All valid inputs', () {
       final result = OnboardingInputValidator.checkCorrectInput(
         parsedHeight: 170.0,
         parsedWeight: 70.0,
@@ -20,8 +19,7 @@ void main() {
       expect(result.weightKg, 70.0);
     });
 
-    // CT2: Altura inválida
-    test('CT2 - Altura inválida', () {
+    test('CT2 - Invalid height', () {
       final result = OnboardingInputValidator.checkCorrectInput(
         parsedHeight: 170.0,
         parsedWeight: 70.0,
@@ -34,9 +32,7 @@ void main() {
       expect(result.heightCm, null);
       expect(result.weightKg, null);
     });
-
-    // CT3: Peso inválido
-    test('CT3 - Peso inválido', () {
+    test('CT3 - Invalid weight', () {
       final result = OnboardingInputValidator.checkCorrectInput(
         parsedHeight: 170.0,
         parsedWeight: 70.0,
@@ -50,8 +46,7 @@ void main() {
       expect(result.weightKg, null);
     });
 
-    // CT4: Altura nula
-    test('CT4 - Altura nula', () {
+    test('CT4 - Null height', () {
       final result = OnboardingInputValidator.checkCorrectInput(
         parsedHeight: null,
         parsedWeight: 70.0,
@@ -65,8 +60,7 @@ void main() {
       expect(result.weightKg, null);
     });
 
-    // CT5: Peso nulo
-    test('CT5 - Peso nulo', () {
+    test('CT5 - Null weight', () {
       final result = OnboardingInputValidator.checkCorrectInput(
         parsedHeight: 170.0,
         parsedWeight: null,
@@ -74,7 +68,6 @@ void main() {
         isWeightValid: true,
         isImperial: isImperial,
       );
-
       expect(result.valid, false);
       expect(result.heightCm, null);
       expect(result.weightKg, null);
