@@ -1,0 +1,7 @@
+organization=reisfreitas
+projectKey=reiSFREITAS_OpenNutriTracker
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.65494
+dashboardUrl=https://sonarcloud.io/dashboard?id=reiSFREITAS_OpenNutriTracker
+ceTaskId=AZgQFAMF-sVvmoFgj5Bl
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZgQFAMF-sVvmoFgj5Bl

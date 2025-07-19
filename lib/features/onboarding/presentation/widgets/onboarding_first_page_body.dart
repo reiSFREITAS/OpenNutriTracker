@@ -90,7 +90,7 @@ class _OnboardingFirstPageBodyState extends State<OnboardingFirstPageBody> {
         firstDate: DateTime(1900),
         lastDate: DateTime(2100));
     if (pickedDate != null) {
-      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      String formattedDate = DateFormat('MM-dd-yyyy').format(pickedDate);
       setState(() {
         _selectedDate = pickedDate;
         _dateInput.text = formattedDate;

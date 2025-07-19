@@ -179,14 +179,18 @@ class _OnboardingSecondPageBodyState extends State<OnboardingSecondPageBody> {
     }
   }
 
-  String? validateWeight(String? value) {
-    if (value == null) return S.of(context).onboardingWrongWeightLabel;
-    if (value.isEmpty || !RegExp(r'^[0-9]').hasMatch(value)) {
-      return S.of(context).onboardingWrongHeightLabel;
-    } else {
-      return null;
-    }
+String? validateWeight(String? value) {
+  if (value == null || value.isEmpty) {
+    return S.of(context).onboardingWrongWeightLabel;
   }
+
+  final parsed = double.tryParse(value.replaceAll(',', '.'));
+  if (parsed == null || parsed <= 10) {
+    return S.of(context).onboardingWrongWeightLabel;
+  }
+
+  return null;
+}
 
   /// Check if the input is correct and update the button content
   void checkCorrectInput() {
